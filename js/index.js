@@ -2,30 +2,32 @@
 
 //random color gen
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  var color = '#';
+  var letter = '0123456789ABCDEF';
+  for (var i = 0; i < 6; i++) {
+    color += letter[Math.floor(Math.random() * 16)];
   }
+  return color;
+}
 
 /* Nav &  header*/
 
-  // changes font color when mouse moves over logo.
+// changes font color when mouse moves over logo.
 const logoMouse = document.querySelector('.logo-heading');
 logoMouse.addEventListener('mouseover', () => {
-    logoMouse.style.color = getRandomColor();
+  logoMouse.style.color = getRandomColor();
 })
 
-const navBg = document.querySelector('.main-navigation');
+const navBg = document.querySelector('.container');
 navBg.addEventListener('mouseover', (e) => {
   navBg.style.backgroundColor = getRandomColor();
+  event.stopPropagation();
+
 })
 
-const  busImg = document.querySelector('.intro img');
+const busImg = document.querySelector('.intro img');
 
-busImg.addEventListener('dblclick', () => {
+busImg.addEventListener('click', () => {
   // console.log('Hello!')
   busImg.style.transform = 'rotate(180deg)';
 })
@@ -33,16 +35,56 @@ busImg.addEventListener('dblclick', () => {
 
 
 
-// /*  Main content */
-
-// const letsGo = document.querySelector('.content-section .text-content').style.resize =
-// "both";
+/*  Main content */
 
 
 
+let imgAppear = document.getElementById('keyDownBox')
 
-const busCrash = document.querySelector('.busCrash img')
-
-busCrash.addEventListener('wheel', () => {
-    console.log('Hello! BusCrash')
+imgAppear.addEventListener('keydown', (e) => {
+  // if(e.keyCode == 27){
+    let splashAd = document.createElement("img");
+    splashAd.setAttribute('src', "img/lambda.png")
+  // }
 })
+
+/*not working */
+function resizeMe() {
+  document.getElementById('resized').style.resize = "both";
+};
+
+const busCrash = document.querySelector('.busCrash img');
+
+
+busCrash.addEventListener('wheel', (e) => {
+  busCrash.setAttribute('src', 'img/Broken Screen.jpg')
+
+});
+
+
+
+/* bottom Content */
+const blurAtt = () => {
+
+  const focusHere = (e) => {
+    var divElement = document.getElementById('destination')[0];
+    divElement.style.backgroundColor = 'orange';
+  };
+
+  const blurHere = (e) => {
+    var divElement = document.getElementById('destination')[0];
+    divElement.style.backgroundColor = 'none';
+  }
+
+  const grabAtt = document.querySelector('.content-destination img');
+  grabAtt.addEventListener('mouseover', (e) => {
+    alert('This could get really annoying');
+  
+  
+    grabAtt.addEventListener('focus', focusHere, false);
+    grabAtt.addEventListener('blur', blurHere, false);
+  
+  });
+}
+
+document.addEventListener('DOMContentLoaded',blurAtt,false);
